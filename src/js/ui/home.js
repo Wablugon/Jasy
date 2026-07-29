@@ -20,7 +20,8 @@ async function cargarPlaylists() {
 
     playlistContainer.innerHTML = "";
     for(const playlist of playlists) {
-        const card = playlistToCard(playlist);
+        const cardModel = playlistToCard(playlist);
+        const card = renderCard(cardModel);
         playlistContainer.append(card);
     }
 }
@@ -33,9 +34,8 @@ async function cargarPlaylistsRecientes() {
 
     playlistContainer.innerHTML = "";
     for(const rTrack of recentTracks) {
-        const card = trackToCard(rTrack)
+        const cardModel = trackToCard(rTrack);
+        const card = renderCard(cardModel);
         playlistContainer.append(card);
     }
 }
-
-
