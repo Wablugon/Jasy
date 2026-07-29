@@ -1,6 +1,8 @@
 import { SpotifyApi } from '@spotify/web-api-ts-sdk';
-import { URL_REDIRECT, SPOTIFY_CLIENT_ID } from ''
 import { SCOPES } from './scopes';
+
+const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+const URL_REDIRECT = import.meta.env.VITE_REDIRECT_URI;
 
 export {
     initializeSpotify,
@@ -13,7 +15,7 @@ let api = null;
 
 function initializeSpotify () {
     if(!api) {
-        api = SpotifyApi.withUserAuthorization(SPOTIFY_CLIENT_ID, "https://localhost:3000", SCOPES);
+        api = SpotifyApi.withUserAuthorization(SPOTIFY_CLIENT_ID, URL_REDIRECT, SCOPES);
     }
     return api;
 }

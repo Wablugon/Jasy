@@ -1,35 +1,39 @@
 import { SpotifyApi } from "@spotify/web-api-ts-sdk";
 import { getSdk } from "./auth.js";
 
-
+export {
+    search,
+    getProfile,
+    getLikedSongs
+}
 /**
  * The query param should be '(String, String[type])'
  * ("Daft Punk", ["artist", "track"])
  * @param {String} query 
  * @returns JSON Object
  */
-function search(query) {
+async function search(query) {
     /** @type {SpotifyApi} */
     const api = getSdk();
     const search = await api.search(query);
     return search;
 }
 
-function getProfile() {
+async function getProfile() {
     /** @type {SpotifyApi} */
     const api = getSdk();
     const user = await api.currentUser.profile();
     return user;
 }
 
-function getLikedSongs() {
+async function getLikedSongs() {
     /** @type {SpotifyApi} */
     const api = getSdk();
     const liked = await api.currentUser.tracks.savedTracks();
     return liked;
 }
 
-function getPlaylists() {
+async function getPlaylists() {
     /** @type {SpotifyApi} */
     const api = getSdk();
     return await api.currentUser.playlists.playlists();
@@ -43,13 +47,13 @@ function getPlaylists() {
  *   }
  */
 
-function getTopTracks() {
+async function getTopTracks() {
     /** @type {SpotifyApi} */
     const api = getSdk();
     return await api.currentUser.topItems("tracks");
 }
 
-function getTopArtists() {
+async function getTopArtists() {
     /** @type {SpotifyApi} */
     const api = getSdk();
     return await api.currentUser.topItems("artists");
