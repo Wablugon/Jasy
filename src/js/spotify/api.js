@@ -31,8 +31,8 @@ async function getProfile() {
 async function getLikedSongs() {
     /** @type {SpotifyApi} */
     const api = getSdk();
-    const liked = await api.currentUser.tracks.savedTracks();
-    return liked;
+    const response = await api.currentUser.tracks.savedTracks();
+    return response;
 }
 
 async function getPlaylists() {
@@ -40,14 +40,7 @@ async function getPlaylists() {
     const api = getSdk();
 
     const response = await api.currentUser.playlists.playlists();
-
-    return response.items.map(p => ({
-        id: p.id,
-        title: p.name,
-        image: p.images[0]?.url,
-        subtitle: p.owner.display_name,
-        type: "Playlist"
-    }));
+    return response.items;
 }
 
 async function getRecentlyPlayed() {
@@ -55,24 +48,19 @@ async function getRecentlyPlayed() {
     const api = getSdk();
 
     const response = await api.player.getRecentlyPlayedTracks();
-
-    return response.items.map(item => ({
-        id: item.track.id,
-        title: item.track.name,
-        image: item.track.album.images[0]?.url,
-        subtitle: item.track.artists.map(a => a.name).join(", "),
-        type: "Track"
-    }));
+    return response.items.map(item => item.track);
 }
 
 async function getTopTracks() {
     /** @type {SpotifyApi} */
     const api = getSdk();
-    return await api.currentUser.topItems("tracks");
+    const response = await api.currentUser.topItems("tracks");
+    return response;
 }
 
 async function getTopArtists() {
     /** @type {SpotifyApi} */
     const api = getSdk();
-    return await api.currentUser.topItems("artists");
+    const response = await api.currentUser.topItems("artists");
+    return response;
 }

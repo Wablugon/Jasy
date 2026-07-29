@@ -1,6 +1,7 @@
 import {getPlaylists, getRecentlyPlayed } from '../spotify/api.js'
-import { renderCard } from '../models/cardMapper'
-
+import { renderCard } from '../mappers/cardMapper.js'
+import { playlistToCard } from '../mappers/playlistMapper.js'
+import { trackToCard } from '../mappers/trackMapper.js';
 /**
  * Necesito pedir: recientes, recomendados y las playlists del usuario
  */
@@ -19,12 +20,7 @@ async function cargarPlaylists() {
 
     playlistContainer.innerHTML = "";
     for(const playlist of playlists) {
-        const card = renderCard(
-        playlist.title,
-        playlist.image,
-        playlist.subtitle,
-        playlist.type
-        );
+        const card = playlistToCard(playlist);
         playlistContainer.append(card);
     }
 }
@@ -33,16 +29,11 @@ async function cargarPlaylistsRecientes() {
     //playlists del usuario
     const playlistSection = document.getElementById("recentSection");
     const playlistContainer = playlistSection.querySelector(".card-container");
-    const playlists = await getRecentlyPlayed();
+    const recentTracks = await getRecentlyPlayed();
 
     playlistContainer.innerHTML = "";
-    for(const playlist of playlists) {
-        const card = renderCard(
-        playlist.title,
-        playlist.image,
-        playlist.subtitle,
-        playlist.type
-        );
+    for(const rTrack of recentTracks) {
+        const card = trackToCard(rTrack)
         playlistContainer.append(card);
     }
 }
