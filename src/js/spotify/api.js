@@ -4,7 +4,9 @@ import { getSdk } from "./auth.js";
 export {
     search,
     getProfile,
-    getLikedSongs
+    getLikedSongs,
+    getPlaylists,
+    getRecentlyPlayed
 }
 /**
  * The query param should be '(String, String[type])'
@@ -36,16 +38,32 @@ async function getLikedSongs() {
 async function getPlaylists() {
     /** @type {SpotifyApi} */
     const api = getSdk();
-    return await api.currentUser.playlists.playlists();
+
+    const response = await api.currentUser.playlists.playlists();
+
+    return response.items.map(p => ({
+        id: p.id,
+        title: p.name,
+        image: p.images[0]?.url,
+        subtitle: p.owner.display_name,
+        type: "Playlist"
+    }));
 }
 
-/**
- * function getRecentlyPlayed() {
- *      @type {SpotifyApi} 
- *      const api = getSdk();
- *       const recent = await api.currentUser.tracks
- *   }
- */
+async function getRecentlyPlayed() {
+    /** @type {SpotifyApi} */
+    const api = getSdk();
+
+    const response = await api.player.getRecentlyPlayedTracks();
+
+    return response.items.map(item => ({
+        id: item.track.id,
+        title: item.track.name,
+        image: item.track.album.images[0]?.url,
+        subtitle: item.track.artists.map(a => a.name).join(", "),
+        type: "Track"
+    }));
+}
 
 async function getTopTracks() {
     /** @type {SpotifyApi} */

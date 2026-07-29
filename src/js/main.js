@@ -1,21 +1,10 @@
-import { initializeSpotify, isInitialized } from './spotify/auth.js'
-import { getProfile } from './spotify/api.js'
+import { initializeSpotify } from "./spotify/auth.js";
+import { cargarHome } from "./ui/home";
 
-document.getElementById("test").addEventListener('click', test);
+document.getElementById("test").addEventListener("click", iniciar);
+async function iniciar() {
 
-async function test() {
     initializeSpotify();
-    if(!isInitialized()) {
-        console.log("error inicializando")
-    } else {
-        console.log("api incializada")
-    }
-    displayNameAndID();
-};
 
-async function displayNameAndID() {
-    const user = await getProfile();
-    const name = user.display_name;
-    const id = user.id;
-    console.log("name: " + name + "||" + "id: " + id);
-};
+    await cargarHome();
+}
