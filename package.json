@@ -1,23 +1,16 @@
 {
   "name": "jasy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Wablugon/Jasy.git"
+  "devDependencies": {
+    "vite": "^8.1.1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Wablugon/Jasy/issues"
-  },
-  "homepage": "https://github.com/Wablugon/Jasy#readme",
   "dependencies": {
     "@spotify/web-api-ts-sdk": "^1.2.0"
   }
