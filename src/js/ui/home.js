@@ -1,18 +1,29 @@
 import {getPlaylists, getRecentlyPlayed } from '../spotify/api.js'
-import { renderCard } from '../mappers/cardMapper.js'
 import { playlistToCard } from '../mappers/playlistMapper.js'
 import { trackToCard } from '../mappers/trackMapper.js';
-/**
- * Necesito pedir: recientes, recomendados y las playlists del usuario
- */
+import { renderSection } from './section.js';
+
 export async function cargarHome() {
 
-    await cargarPlaylists();
-    await cargarPlaylistsRecientes();
+    const playlists = await getPlaylists();
+    const recentTracks = await getRecentlyPlayed();
 
+    renderSection(
+    "playlistsSection",
+    "Tus playlists",
+    playlists,
+    playlistToCard
+    );
+
+    renderSection(
+    "recentSection",
+    "Canciones Recientes",
+    recentTracks,
+    trackToCard
+    );
 }
 
-async function cargarPlaylists() {
+/* async function cargarPlaylists() {
     //playlists del usuario
     const playlistSection = document.getElementById("playlistsSection");
     const playlistContainer = playlistSection.querySelector(".card-container");
@@ -38,4 +49,4 @@ async function cargarPlaylistsRecientes() {
         const card = renderCard(cardModel);
         playlistContainer.append(card);
     }
-}
+} */

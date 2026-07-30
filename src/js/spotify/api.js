@@ -1,3 +1,6 @@
+/**
+ * api.js debe devolver objetos UTILES, no sus envoltorios -> retorna tracks, playlists, artistas
+ */
 import { SpotifyApi } from "@spotify/web-api-ts-sdk";
 import { getSdk } from "./auth.js";
 
@@ -14,10 +17,10 @@ export {
  * @param {String} query 
  * @returns JSON Object
  */
-async function search(query) {
+async function search(query, types = ["track", "album", "artist"]) {
     /** @type {SpotifyApi} */
     const api = getSdk();
-    const search = await api.search(query);
+    const search = await api.search(query, types, "AR", 10, 0);
     return search;
 }
 
