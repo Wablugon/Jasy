@@ -5,7 +5,9 @@ export function albumToCard(album) {
 
         title: album.name,
 
-        subtitle: album.artists,
+        subtitle: album.artists
+            .map(artist => artist.name)
+            .join(", "),
 
         image: album.images[0]?.url,
 

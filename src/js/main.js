@@ -18,10 +18,12 @@ async function principal() {
 
 async function search() {
     iniciar();
-    const input = document.getElementById("searchInput").innerText;
-    //validacion input vacio
+    const input = document.getElementById("searchInput").value.trim();
 
-    //.
-    const { albums, tracks, artists } = searchQuery(input);
+    if (!input) {
+        return;
+    }
+
+    const { albums, tracks, artists } = await searchQuery(input);
     await renderSearch(albums, tracks, artists);
 }
