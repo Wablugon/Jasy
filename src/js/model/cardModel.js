@@ -4,6 +4,6 @@
  * @property {string} title
  * @property {string} subtitle
  * @property {string} image
- * @property {"playlist" | "track" | "album"} type
+ * @property {"playlist" | "track" | "album"} entityType
  * @property {string} [uri]
  */

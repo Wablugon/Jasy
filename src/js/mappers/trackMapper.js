@@ -1,16 +1,14 @@
 /** @returns {CardModel} */
 export function trackToCard(track) {
-    return {
-        id: track.id,
+  return {
+    id: track.id,
 
-        title: track.name,
+    title: track.name,
 
-        subtitle: track.artists
-            .map(artist => artist.name)
-            .join(", "),
+    subtitle: track.artists.map((artist) => artist.name).join(", "),
 
-        image: track.album.images[0]?.url,
+    image: track.album.images[0]?.url,
 
-        type: "track"
-    };
+    entityType: "track",
+  };
 }

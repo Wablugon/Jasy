@@ -1,14 +1,14 @@
 /** @returns {CardModel} */
 export function playlistToCard(playlist) {
-    return {
-        id: playlist.id,
+  return {
+    id: playlist.id,
 
-        title: playlist.name,
+    title: playlist.name,
 
-        subtitle: playlist.owner.display_name,
+    subtitle: playlist.owner.display_name,
 
-        image: playlist.images[0]?.url,
+    image: playlist.images[0]?.url,
 
-        type: "playlist"
-    };
+    entityType: "playlist",
+  };
 }

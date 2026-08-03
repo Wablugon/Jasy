@@ -1,14 +1,14 @@
 /** @returns {CardModel} */
 export function artistToCard(artist) {
-    return {
-        id: artist.id,
+  return {
+    id: artist.id,
 
-        title: artist.name,
+    title: artist.name,
 
-        subtitle: "",
+    subtitle: "",
 
-        image: artist.images[0]?.url,
+    image: artist.images[0]?.url,
 
-        type: "artist"
-    };
+    entityType: "artist",
+  };
 }

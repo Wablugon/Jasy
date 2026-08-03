@@ -1,16 +1,14 @@
 /** @returns {CardModel} */
 export function albumToCard(album) {
-    return {
-        id: album.id,
+  return {
+    id: album.id,
 
-        title: album.name,
+    title: album.name,
 
-        subtitle: album.artists
-            .map(artist => artist.name)
-            .join(", "),
+    subtitle: album.artists.map((artist) => artist.name).join(", "),
 
-        image: album.images[0]?.url,
+    image: album.images[0]?.url,
 
-        type: "album"
-    };
+    entityType: "album",
+  };
 }

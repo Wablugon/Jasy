@@ -9,27 +9,24 @@ import { renderCard } from "../mappers/cardMapper.js";
  * @param {Function} mapper Función que convierte un dato en CardModel.
  */
 export function renderSection(sectionId, title, data, mapper) {
+  const section = document.getElementById(sectionId);
 
-    const section = document.getElementById(sectionId);
+  if (!section) {
+    throw new Error(`No existe la sección '${sectionId}'.`);
+  }
 
-    if (!section) {
-        throw new Error(`No existe la sección '${sectionId}'.`);
-    }
+  const titleElement = section.querySelector("h2");
+  const container = section.querySelector(".card-container");
 
-    const titleElement = section.querySelector("h2");
-    const container = section.querySelector(".card-container");
+  titleElement.textContent = title;
 
-    titleElement.textContent = title;
+  container.innerHTML = "";
 
-    container.innerHTML = "";
+  for (const item of data) {
+    const cardModel = mapper(item);
 
-    for (const item of data) {
+    const card = renderCard(cardModel);
 
-        const cardModel = mapper(item);
-
-        const card = renderCard(cardModel);
-
-        container.append(card);
-
-    }
+    container.append(card);
+  }
 }

@@ -1,29 +1,25 @@
 import { initializeSpotify } from "./spotify/auth.js";
-import { cargarHome } from "./ui/home";
-import { searchQuery } from "./ui/search.js";
-import { renderSearch } from "./ui/search.js";
+import { renderHome } from "./ui/homeView.js";
+import { searchQuery } from "./ui/searchView.js";
+import { renderSearch } from "./ui/searchView.js";
+import { showView } from "./ui/viewManager.js";
 
-document.getElementById("test").addEventListener("click", principal);
+window.addEventListener("DOMContentLoaded", iniciar);
 document.getElementById("searchButton").addEventListener("click", search);
+
 async function iniciar() {
-
-    initializeSpotify();
-    
-}
-
-async function principal() {
-    iniciar();
-    cargarHome();
+  initializeSpotify();
+  showView("homeView");
+  await renderHome();
 }
 
 async function search() {
-    iniciar();
-    const input = document.getElementById("searchInput").value.trim();
+  const input = document.getElementById("searchInput").value.trim();
 
-    if (!input) {
-        return;
-    }
+  if (!input) {
+    return;
+  }
 
-    const { albums, tracks, artists } = await searchQuery(input);
-    await renderSearch(albums, tracks, artists);
+  const { albums, tracks, artists } = await searchQuery(input);
+  await renderSearch(albums, tracks, artists);
 }
