@@ -1,5 +1,5 @@
-import { search } from "../spotify/api";
-import { renderSection } from "./section";
+import { search } from "../api/spotify";
+import { renderSection } from "../js/ui/section";
 import { trackToCard } from "../mappers/trackMapper";
 import { albumToCard } from "../mappers/albumMapper";
 import { artistToCard } from "../mappers/artistMapper";

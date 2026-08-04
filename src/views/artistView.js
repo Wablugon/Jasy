@@ -4,11 +4,11 @@ import {
   getAppearsOn,
   getSingles,
   getTopTracks,
-} from "../spotify/api";
-import { renderSection } from "./section.js";
-import { artistToCard } from "../mappers/artistMapper.js";
-import { trackToCard } from "../mappers/trackMapper.js";
-import { albumToCard } from "../mappers/albumMapper.js";
+} from "../api/spotify.js";
+import { renderSection } from "../js/ui/section.js";
+import { artistToCard } from "../mappers/spotify/artistMapper.js";
+import { trackToCard } from "../mappers/spotify/trackMapper.js";
+import { albumToCard } from "../mappers/spotify/albumMapper.js";
 import { trackToRow } from "../mappers/trackRowMapper.js";
 import { renderCard, renderTrackRow } from "../mappers/cardMapper.js";
 
@@ -37,17 +37,17 @@ async function loadTopTracks(id) {
   return topTracks;
 }
 
-function renderArtist(artist, topTracks, albums) {
+export function renderArtist(artist, topTracks, albums) {
   const artistCard = artistToCard(artist);
   // ---------- HEADER ----------
 
   document.getElementById("artistImage").src =
     artistCard.image ?? "/images/default-cover.png";
 
-  document.getElementById("artistName").textContent = artistCard.title;
+  document.getElementById("artistName").textContent = artist.title;
 
   document.getElementById("artistFollowers").textContent =
-    artistData.followers.total;
+    artist.followers.total;
 
   document.getElementById("artistGenres").textContent = artist.genres.length
     ? artistCard.genres.join(", ")

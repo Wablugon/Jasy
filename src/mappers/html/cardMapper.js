@@ -1,4 +1,4 @@
-import { navigate } from "../ui/viewManager";
+import { navigate } from "../../js/ui/viewManager";
 
 /**
  * @param {CardModel} cardModel
@@ -31,7 +31,7 @@ export function renderTrackRow(trackModel, index) {
 
         <span class="track-title">${trackModel.title}</span>
 
-        <span class="track-duration">${trackModel.duration}</span>
+        <span class="track-duration">${msToMinutes(trackModel.duration_ms)}:${msToSeconds < 10 ? "0" : ""}</span>
 
         <button class="track-play">▶</button>
     `;

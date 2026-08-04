@@ -1,4 +1,4 @@
-import { renderCard } from "../mappers/cardMapper.js";
+import { renderCard } from "../../mappers/html/cardMapper.js";
 
 /**
  * Renderiza una sección de la página.
