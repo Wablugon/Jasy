@@ -3,6 +3,7 @@
  */
 import { SpotifyApi } from "@spotify/web-api-ts-sdk";
 import { getSdk } from "./auth.js";
+import { DEFAULT_MARKET } from "../config/constants.js";
 
 export {
   search,
@@ -80,35 +81,41 @@ async function getArtist(id) {
   return response;
 }
 
-async function getTopTracks(artistID) {
+async function getTopTracks(artistID, market = DEFAULT_MARKET) {
   /** @type {SpotifyApi} */
   const api = getSdk();
-  const response = await api.artists.topTracks(artistID, "AR");
+  const response = await api.artists.topTracks(artistID, market);
   return response.tracks;
 }
 
 //array de <album>
-async function getTopAlbums(artistID) {
+async function getTopAlbums(artistID, market = DEFAULT_MARKET) {
   /** @type {SpotifyApi} */
   const api = getSdk();
   //aclaracion del metodo, devuelve 10 albumes o menos, si hay mas albumes hay que cambiar el offset de 0
   //a 10 (y asi sucesivamente)
-  const response = await api.artists.albums(artistID, "album", "AR", 10, 0);
+  const response = await api.artists.albums(artistID, "album", market, 10, 0);
   return response.items;
 }
 
-async function getSingles(artistID) {
+async function getSingles(artistID, market = DEFAULT_MARKET) {
   /** @type {SpotifyApi} */
   //misma idea que el de top albums, pero limitado a 5
   const api = getSdk();
-  const response = await api.artists.albums(artistID, "single", "AR", 5, 0);
+  const response = await api.artists.albums(artistID, "single", market, 5, 0);
   return response.items;
 }
 
-async function getAppearsOn(artistID) {
+async function getAppearsOn(artistID, market = DEFAULT_MARKET) {
   /** @type {SpotifyApi} */
   //misma idea que el de top albums, pero limitado a 5
   const api = getSdk();
-  const response = await api.artists.albums(artistID, "appears_on", "AR", 5, 0);
+  const response = await api.artists.albums(
+    artistID,
+    "appears_on",
+    market,
+    5,
+    0,
+  );
   return response.items;
 }

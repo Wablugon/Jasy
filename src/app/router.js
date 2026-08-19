@@ -1,5 +1,5 @@
-import { loadArtist } from "../../views/artistView";
-import { loadAlbum } from "../../views/albumView";
+import { loadArtist } from "../views/artistView";
+import { loadAlbum } from "../views/albumView";
 
 export async function showView(viewId) {
   hideAllViews();

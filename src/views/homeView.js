@@ -1,7 +1,7 @@
 import { getPlaylists, getRecentlyPlayed } from "../api/spotify.js";
-import { playlistToCard } from "../mappers/playlistMapper.js";
-import { trackToCard } from "../mappers/trackMapper.js";
-import { renderSection } from "../js/ui/section.js";
+import { playlistToCard } from "../mappers/spotify/playlistMapper.js";
+import { trackToCard } from "../mappers/spotify/trackMapper.js";
+import { renderSection } from "../mappers/html/section.js";
 
 export async function renderHome() {
   const playlists = await getPlaylists();

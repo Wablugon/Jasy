@@ -5,12 +5,12 @@ import {
   getSingles,
   getTopTracks,
 } from "../api/spotify.js";
-import { renderSection } from "../js/ui/section.js";
+import { renderSection } from "../mappers/html/section.js";
 import { artistToCard } from "../mappers/spotify/artistMapper.js";
 import { trackToCard } from "../mappers/spotify/trackMapper.js";
 import { albumToCard } from "../mappers/spotify/albumMapper.js";
-import { trackToRow } from "../mappers/trackRowMapper.js";
-import { renderCard, renderTrackRow } from "../mappers/cardMapper.js";
+import { trackToRow } from "../mappers/html/trackRowMapper.js";
+import { renderCard, renderTrackRow } from "../mappers/html/cardMapper.js";
 
 async function loadArtistProfile(id) {
   const artistData = await getArtist(id);

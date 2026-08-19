@@ -1,8 +1,8 @@
 import { search } from "../api/spotify";
-import { renderSection } from "../js/ui/section";
-import { trackToCard } from "../mappers/trackMapper";
-import { albumToCard } from "../mappers/albumMapper";
-import { artistToCard } from "../mappers/artistMapper";
+import { renderSection } from "../mappers/html/section.js";
+import { trackToCard } from "../mappers/spotify/trackMapper.js";
+import { albumToCard } from "../mappers/spotify/albumMapper";
+import { artistToCard } from "../mappers/spotify/artistMapper.js";
 export { searchQuery, renderSearch };
 
 async function searchQuery(query) {
