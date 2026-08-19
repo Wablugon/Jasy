@@ -2,12 +2,14 @@ import { initializeSpotify } from "../api/auth.js";
 import { renderHome } from "../views/homeView.js";
 import { searchQuery, renderSearch } from "../views/searchView.js";
 import { showView } from "../app/router.js";
+import { initHeader } from "../controllers/headerController.js";
 
 window.addEventListener("DOMContentLoaded", iniciar);
 document.getElementById("searchButton").addEventListener("click", search);
 
 async function iniciar() {
   initializeSpotify();
+  initHeader();
   showView("homeView");
   await renderHome();
 }

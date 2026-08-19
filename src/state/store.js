@@ -1,17 +1,35 @@
-const state = {
-  currentView: "home",
+class Store {
+  constructor() {
+    this.state = {
+      user: null,
+      searchQuery: "",
+      currentTrack: null,
+      currentView: "home",
+    };
 
-  currentUser: null,
+    this.listeners = [];
+  }
+  getState() {
+    return this.state;
+  }
 
-  currentTrack: null,
+  setState(newState) {
+    this.state = { ...this.state, ...newState };
+    this.notify();
+  }
 
-  queue: [],
-};
+  subscribe(listener) {
+    this.listeners.push(listener);
 
-export function getState() {
-  return state;
+    return () => {
+      this.listeners = this.listeners.filter((l) => l !== listener);
+    };
+  }
+
+  notify() {
+    for (const listener of this.listeners) {
+      listener(this.state);
+    }
+  }
 }
-
-export function setState(values) {
-  Object.assign(state, values);
-}
+export const store = new Store();
